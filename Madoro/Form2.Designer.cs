@@ -37,11 +37,11 @@
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkbox_Minimize = new System.Windows.Forms.CheckBox();
+            this.btn_Start = new Madoro.RoundButton();
             this.label_LongBreaksTiming = new System.Windows.Forms.Label();
             this.label_PomoSessions = new System.Windows.Forms.Label();
             this.btn_Pause = new System.Windows.Forms.Button();
             this.myNotification = new System.Windows.Forms.NotifyIcon(this.components);
-            this.btn_Start = new Madoro.RoundButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,12 +125,27 @@
             // 
             this.checkbox_Minimize.AutoSize = true;
             this.checkbox_Minimize.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkbox_Minimize.Location = new System.Drawing.Point(195, 562);
+            this.checkbox_Minimize.Location = new System.Drawing.Point(189, 562);
             this.checkbox_Minimize.Name = "checkbox_Minimize";
-            this.checkbox_Minimize.Size = new System.Drawing.Size(352, 26);
+            this.checkbox_Minimize.Size = new System.Drawing.Size(365, 26);
             this.checkbox_Minimize.TabIndex = 8;
-            this.checkbox_Minimize.Text = "Send To Task Tray When Minimized";
+            this.checkbox_Minimize.Text = "Hide In System Tray When Minimized";
             this.checkbox_Minimize.UseVisualStyleBackColor = true;
+            // 
+            // btn_Start
+            // 
+            this.btn_Start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(236)))), ((int)(((byte)(141)))));
+            this.btn_Start.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_Start.FlatAppearance.BorderSize = 0;
+            this.btn_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Start.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Start.Location = new System.Drawing.Point(312, 280);
+            this.btn_Start.Name = "btn_Start";
+            this.btn_Start.Size = new System.Drawing.Size(120, 120);
+            this.btn_Start.TabIndex = 11;
+            this.btn_Start.Text = "Start";
+            this.btn_Start.UseVisualStyleBackColor = false;
+            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
             // 
             // label_LongBreaksTiming
             // 
@@ -174,22 +189,8 @@
             this.myNotification.Icon = ((System.Drawing.Icon)(resources.GetObject("myNotification.Icon")));
             this.myNotification.Text = "Madoro";
             this.myNotification.Visible = true;
+            this.myNotification.MouseClick += new System.Windows.Forms.MouseEventHandler(this.myNotification_MouseDoubleClick);
             this.myNotification.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.myNotification_MouseDoubleClick);
-            // 
-            // btn_Start
-            // 
-            this.btn_Start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(236)))), ((int)(((byte)(141)))));
-            this.btn_Start.Cursor = System.Windows.Forms.Cursors.Default;
-            this.btn_Start.FlatAppearance.BorderSize = 0;
-            this.btn_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Start.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Start.Location = new System.Drawing.Point(312, 280);
-            this.btn_Start.Name = "btn_Start";
-            this.btn_Start.Size = new System.Drawing.Size(120, 120);
-            this.btn_Start.TabIndex = 11;
-            this.btn_Start.Text = "Start";
-            this.btn_Start.UseVisualStyleBackColor = false;
-            this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
             // 
             // Form2
             // 

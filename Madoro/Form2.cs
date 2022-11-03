@@ -40,7 +40,7 @@ namespace Madoro
         {
             myCountdown.Tick -= MyCountdown_Tick;
             myCountdown.Enabled = true;
-            myCountdown.Interval = 5;
+            myCountdown.Interval = 1000;
             myCountdown.Start();
             myCountdown.Tick += MyCountdown_Tick;
         }
@@ -72,9 +72,9 @@ namespace Madoro
         #endregion
         private void Form2_Load(object sender, EventArgs e)
         {
-            label_Pomodoro.Text = "Pomodoro Duration: " + pomodoroDuration;
-            label_Break.Text = "Break Duration: " + breakDuration;
-            label_LongBreak.Text = "Long Break Duration: " + longBreakDuration;
+            label_Pomodoro.Text = "Pomodoro Duration: " + pomodoroDuration + " minutes";
+            label_Break.Text = "Break Duration: " + breakDuration + " minutes";
+            label_LongBreak.Text = "Long Break Duration: " + longBreakDuration + " minutes";
             pomosLeftCount = totalPomodorosCount;
             label_PomoSessions.Text = "Pomodoro Sessions Left: " + pomosLeftCount;
             label_LongBreaksTiming.Text = "Long Breaks: Will Start After Each " + numOfPomosUnitlLong + " Pomodoros.";
@@ -219,11 +219,7 @@ namespace Madoro
             if (FormWindowState.Minimized == this.WindowState)
             {
                 myNotification.Visible = true;
-                myNotification.BalloonTipText = "I Will Stay Here From Now On.";
-                myNotification.BalloonTipTitle = "Hey...";
                 this.ShowInTaskbar = false;
-                myNotification.ShowBalloonTip(1000);
-
             }
         }
         private void button1_Click(object sender, EventArgs e)
