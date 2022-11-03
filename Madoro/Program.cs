@@ -19,13 +19,13 @@ namespace Madoro
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form2());
 
-            if (Settings.Default.FirstRun)
+            if (Settings.Default.isFirstRun == true)
             {
-                Application.Run(new Form2());
+                Application.Run(new Form1());
             }
             else
-            { 
-                Application.Run(new Form1());
+            {
+                Application.Run(new Form2());
             }
         }
     }

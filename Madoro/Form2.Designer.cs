@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.label_Pomodoro = new System.Windows.Forms.Label();
             this.label_Break = new System.Windows.Forms.Label();
             this.label_LongBreak = new System.Windows.Forms.Label();
             this.label_Timer = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_Pause = new System.Windows.Forms.Button();
-            this.label_PomoSessions = new System.Windows.Forms.Label();
+            this.checkbox_Minimize = new System.Windows.Forms.CheckBox();
             this.label_LongBreaksTiming = new System.Windows.Forms.Label();
+            this.label_PomoSessions = new System.Windows.Forms.Label();
+            this.btn_Pause = new System.Windows.Forms.Button();
+            this.myNotification = new System.Windows.Forms.NotifyIcon(this.components);
             this.btn_Start = new Madoro.RoundButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -95,14 +99,16 @@
             this.button1.TabIndex = 5;
             this.button1.Text = "@";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(228)))), ((int)(((byte)(241)))));
+            this.panel1.Controls.Add(this.checkbox_Minimize);
+            this.panel1.Controls.Add(this.btn_Start);
             this.panel1.Controls.Add(this.label_LongBreaksTiming);
             this.panel1.Controls.Add(this.label_PomoSessions);
             this.panel1.Controls.Add(this.btn_Pause);
-            this.panel1.Controls.Add(this.btn_Start);
             this.panel1.Controls.Add(this.label_Pomodoro);
             this.panel1.Controls.Add(this.label_LongBreak);
             this.panel1.Controls.Add(this.label_Timer);
@@ -115,28 +121,16 @@
             this.panel1.Size = new System.Drawing.Size(743, 697);
             this.panel1.TabIndex = 7;
             // 
-            // btn_Pause
+            // checkbox_Minimize
             // 
-            this.btn_Pause.BackColor = System.Drawing.Color.LightCoral;
-            this.btn_Pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Pause.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Pause.Location = new System.Drawing.Point(321, 439);
-            this.btn_Pause.Name = "btn_Pause";
-            this.btn_Pause.Size = new System.Drawing.Size(100, 100);
-            this.btn_Pause.TabIndex = 7;
-            this.btn_Pause.Text = "Pause";
-            this.btn_Pause.UseVisualStyleBackColor = false;
-            this.btn_Pause.Click += new System.EventHandler(this.btn_Pause_Click);
-            // 
-            // label_PomoSessions
-            // 
-            this.label_PomoSessions.AutoSize = true;
-            this.label_PomoSessions.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_PomoSessions.Location = new System.Drawing.Point(17, 624);
-            this.label_PomoSessions.Name = "label_PomoSessions";
-            this.label_PomoSessions.Size = new System.Drawing.Size(180, 15);
-            this.label_PomoSessions.TabIndex = 8;
-            this.label_PomoSessions.Text = "Pomodoro Sessions Left: K";
+            this.checkbox_Minimize.AutoSize = true;
+            this.checkbox_Minimize.Font = new System.Drawing.Font("Arial Rounded MT Bold", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkbox_Minimize.Location = new System.Drawing.Point(195, 562);
+            this.checkbox_Minimize.Name = "checkbox_Minimize";
+            this.checkbox_Minimize.Size = new System.Drawing.Size(352, 26);
+            this.checkbox_Minimize.TabIndex = 8;
+            this.checkbox_Minimize.Text = "Send To Task Tray When Minimized";
+            this.checkbox_Minimize.UseVisualStyleBackColor = true;
             // 
             // label_LongBreaksTiming
             // 
@@ -148,15 +142,51 @@
             this.label_LongBreaksTiming.TabIndex = 9;
             this.label_LongBreaksTiming.Text = "Long Breaks: L";
             // 
+            // label_PomoSessions
+            // 
+            this.label_PomoSessions.AutoSize = true;
+            this.label_PomoSessions.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_PomoSessions.Location = new System.Drawing.Point(17, 624);
+            this.label_PomoSessions.Name = "label_PomoSessions";
+            this.label_PomoSessions.Size = new System.Drawing.Size(180, 15);
+            this.label_PomoSessions.TabIndex = 8;
+            this.label_PomoSessions.Text = "Pomodoro Sessions Left: K";
+            // 
+            // btn_Pause
+            // 
+            this.btn_Pause.BackColor = System.Drawing.Color.LightCoral;
+            this.btn_Pause.FlatAppearance.BorderSize = 0;
+            this.btn_Pause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Pause.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Pause.Location = new System.Drawing.Point(323, 423);
+            this.btn_Pause.Name = "btn_Pause";
+            this.btn_Pause.Size = new System.Drawing.Size(100, 100);
+            this.btn_Pause.TabIndex = 7;
+            this.btn_Pause.Text = "Pause";
+            this.btn_Pause.UseVisualStyleBackColor = false;
+            this.btn_Pause.Click += new System.EventHandler(this.btn_Pause_Click);
+            // 
+            // myNotification
+            // 
+            this.myNotification.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.myNotification.BalloonTipText = "Madoro Will Be Minimized";
+            this.myNotification.BalloonTipTitle = "Madoro";
+            this.myNotification.Icon = ((System.Drawing.Icon)(resources.GetObject("myNotification.Icon")));
+            this.myNotification.Text = "Madoro";
+            this.myNotification.Visible = true;
+            this.myNotification.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.myNotification_MouseDoubleClick);
+            // 
             // btn_Start
             // 
-            this.btn_Start.BackColor = System.Drawing.Color.LightGreen;
+            this.btn_Start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(236)))), ((int)(((byte)(141)))));
+            this.btn_Start.Cursor = System.Windows.Forms.Cursors.Default;
+            this.btn_Start.FlatAppearance.BorderSize = 0;
             this.btn_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Start.Font = new System.Drawing.Font("Arial Rounded MT Bold", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Start.Location = new System.Drawing.Point(311, 299);
+            this.btn_Start.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Start.Location = new System.Drawing.Point(312, 280);
             this.btn_Start.Name = "btn_Start";
             this.btn_Start.Size = new System.Drawing.Size(120, 120);
-            this.btn_Start.TabIndex = 6;
+            this.btn_Start.TabIndex = 11;
             this.btn_Start.Text = "Start";
             this.btn_Start.UseVisualStyleBackColor = false;
             this.btn_Start.Click += new System.EventHandler(this.btn_Start_Click);
@@ -165,12 +195,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.MistyRose;
             this.ClientSize = new System.Drawing.Size(743, 697);
             this.Controls.Add(this.panel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Madoro";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
+            this.Resize += new System.EventHandler(this.Form2_Resize);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -184,10 +221,12 @@
         private System.Windows.Forms.Label label_LongBreak;
         private System.Windows.Forms.Label label_Timer;
         private System.Windows.Forms.Button button1;
-        private RoundButton btn_Start;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_Pause;
         private System.Windows.Forms.Label label_LongBreaksTiming;
         private System.Windows.Forms.Label label_PomoSessions;
+        private RoundButton btn_Start;
+        private System.Windows.Forms.CheckBox checkbox_Minimize;
+        private System.Windows.Forms.NotifyIcon myNotification;
     }
 }

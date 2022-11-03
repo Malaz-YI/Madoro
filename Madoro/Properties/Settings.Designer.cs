@@ -85,13 +85,13 @@ namespace Madoro.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool FirstRun {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool isFirstRun {
             get {
-                return ((bool)(this["FirstRun"]));
+                return ((bool)(this["isFirstRun"]));
             }
             set {
-                this["FirstRun"] = value;
+                this["isFirstRun"] = value;
             }
         }
     }

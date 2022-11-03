@@ -32,8 +32,6 @@ namespace Madoro
         public Form2()
         {
             InitializeComponent();
-            btn_Start.FlatAppearance.BorderSize = 0;
-            btn_Pause.FlatAppearance.BorderSize = 0;
         }
 
         #region Timer
@@ -52,7 +50,7 @@ namespace Madoro
             // Run a Pomodoro timer only when the start button has been fired for an odd number of times
             // (as the breaks and pomodoros are alternating constantly, the break comes next at an even round.
             // And run it only when the max pomodorosCount is not met yet
-            if (pomosRunCount < totalPomodorosCount && startFiresCount % 2 != 0)
+            if (pomosRunCount < totalPomodorosCount && (startFiresCount % 2 == 0 || startFiresCount == 0))
             {
                 startPomodoroSession();
             }
@@ -79,25 +77,27 @@ namespace Madoro
             label_LongBreak.Text = "Long Break Duration: " + longBreakDuration;
             pomosLeftCount = totalPomodorosCount;
             label_PomoSessions.Text = "Pomodoro Sessions Left: " + pomosLeftCount;
-            label_LongBreaksTiming.Text = "Long Breaks: Will Start After Each " + numOfPomosUnitlLong + "Pomodoros.";
+            label_LongBreaksTiming.Text = "Long Breaks: Will Start After Each " + numOfPomosUnitlLong + " Pomodoros.";
 
         }
 
         private void btn_Start_Click(object sender, EventArgs e)
         {
-            startFiresCount++;
-            myCountdown.Dispose();
             TimerStart();
             btn_Start.Enabled = false;
         }
 
         private void btn_Pause_Click(object sender, EventArgs e)
         {
-            myCountdown.Stop();
-            myCountdown.Enabled = false;
-            btn_Start.Text = "Continue";
-            btn_Start.Enabled = true;
-            btn_Start.Font = new Font("Arial Rounded MT Bold", 16);
+            if (myCountdown.Enabled)
+            {
+                myCountdown.Stop();
+                myCountdown.Enabled = false;
+                btn_Start.Text = "Continue";
+                btn_Start.Enabled = true;
+                btn_Start.Font = new Font("Arial Rounded MT Bold", 16);
+            }
+            
         }
 
         // Functions:
@@ -137,6 +137,7 @@ namespace Madoro
                     // Decrease the visible (for show only) pomodoros left count:
                     pomosLeftCount--;
                     label_PomoSessions.Text = "Pomodoro Sessions Left: " + pomosLeftCount;
+                    startFiresCount++;
                 }
             }
         }
@@ -171,6 +172,8 @@ namespace Madoro
                     label_Break.ForeColor = Color.Black;
                     // Reset The Original Duration
                     breakDuration = Settings.Default.BreakDuration;
+                    startFiresCount++;
+
                 }
             }
         }
@@ -205,8 +208,50 @@ namespace Madoro
                     label_LongBreak.ForeColor = Color.Black;
                     // Reset The Original Duration
                     longBreakDuration = Settings.Default.LongBreakDuration;
+                    startFiresCount++;
+
                 }
             }
+        }
+
+        public void SendToTray()
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                myNotification.Visible = true;
+                myNotification.BalloonTipText = "I Will Stay Here From Now On.";
+                myNotification.BalloonTipTitle = "Hey...";
+                this.ShowInTaskbar = false;
+                myNotification.ShowBalloonTip(1000);
+
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Form1 form1Window = new Form1();
+            form1Window.Show();
+            this.Hide();
+        }
+
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void Form2_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized && checkbox_Minimize.Checked)
+            {
+                SendToTray();
+                this.ShowInTaskbar = false;
+            }
+        }
+
+        private void myNotification_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+            this.ShowInTaskbar = true;
+            myNotification.Visible = false;
         }
     }
 }

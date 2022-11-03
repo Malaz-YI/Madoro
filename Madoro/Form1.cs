@@ -35,6 +35,7 @@ namespace Madoro
                     Settings.Default["LongBreakDuration"] = Convert.ToInt32(textbox_LongBreakDuration.Text);
                     Settings.Default["NumOfPomos"] = Convert.ToInt32(textbox_TotalNumOfPomos.Text);
                     Settings.Default["NumOfPomosUntilLongBreak"] = Convert.ToInt32(textbox_NumOfPomosForLongBreak.Text);
+                    Settings.Default.isFirstRun = false;
                     Settings.Default.Save();
 
                     Form2 form2Window = new Form2();
