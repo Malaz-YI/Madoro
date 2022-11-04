@@ -2,4 +2,14 @@
 
 Simple straight-forward Pomodoro timer for Windows desktop, written C# (.NET WinForm).
 
-Grab the latest release build from here: [https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro%20Build.7z](https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro%20Build.7z)
+Grab the latest release build from here: [https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro.zip](https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro.zip)
+
+
+----
+<img src="https://github.com/Malaz-YI/Madoro/blob/main/icon.png" width="480">
+
+# Screenshots:
+
+![screeonshot 1](https://github.com/Malaz-YI/Madoro/blob/main/SS-Settings.png)
+***
+![screenshot 2](https://github.com/Malaz-YI/Madoro/blob/main/SS-Main.png)
