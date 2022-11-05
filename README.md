@@ -1,6 +1,6 @@
 # Madoro
 
-Simple straight-forward Pomodoro timer for Windows desktop, written C# (.NET WinForm).
+Simple straight-forward Pomodoro timer for Windows desktop, written in C# (.NET WinForm).
 
 Download the latest release build from here: [https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro.zip](https://github.com/Malaz-YI/Madoro/raw/main/Madoro/Madoro.zip)
 
