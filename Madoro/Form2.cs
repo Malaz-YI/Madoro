@@ -56,7 +56,7 @@ namespace Madoro
             }
             else if (pomosRunCount % numOfPomosUnitlLong != 0 && pomosRunCount < totalPomodorosCount)
             {
-                starBreakSession();
+                startBreakSession();
             }
             else if (pomosRunCount % numOfPomosUnitlLong == 0 && pomosRunCount < totalPomodorosCount)
             {
@@ -123,7 +123,7 @@ namespace Madoro
                     myCountdown.Stop();
                     myCountdown.Enabled = false;
                     // Make  sound effect:
-                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(@".\Music\pomodoroEnd.wav");
+                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(Madoro.Properties.Resources.pomodoroEnd);
                     endSound.Play();
                     // Enable Start button
                     btn_Start.Enabled = true;
@@ -134,14 +134,18 @@ namespace Madoro
                     label_Pomodoro.ForeColor = Color.Black;
                     // Reset The Original Duration
                     pomodoroDuration = Settings.Default.PomoDuration;
-                    // Decrease the visible (for show only) pomodoros left count:
+                    // Decrease the visible (for show only) pomodoros left count
                     pomosLeftCount--;
                     label_PomoSessions.Text = "Pomodoro Sessions Left: " + pomosLeftCount;
                     startFiresCount++;
+                    // Show pop-up notification
+                    pomodoroNotification.BalloonTipTitle = "Pomodoro Session Ended!";
+                    pomodoroNotification.BalloonTipText = "Open the app to start the break.";
+                    pomodoroNotification.ShowBalloonTip(2500);
                 }
             }
         }
-        public void starBreakSession() 
+        public void startBreakSession() 
         {
             label_Break.ForeColor = Color.Blue;
             if (breakDuration > 0 || startingSeconds >= 0)
@@ -163,7 +167,7 @@ namespace Madoro
                     myCountdown.Stop();
                     myCountdown.Enabled = false;
                     // Make  sound effect:
-                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(@".\Music\breakEnd.wav");
+                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(Madoro.Properties.Resources.breakEnd);
                     endSound.Play();
                     // Enable Start button
                     btn_Start.Enabled = true;
@@ -173,6 +177,10 @@ namespace Madoro
                     // Reset The Original Duration
                     breakDuration = Settings.Default.BreakDuration;
                     startFiresCount++;
+                    // Show pop-up notification
+                    pomodoroNotification.BalloonTipTitle = "Break Ended!";
+                    pomodoroNotification.BalloonTipText = "Open the app to start the next pomodoro.";
+                    pomodoroNotification.ShowBalloonTip(2500);
 
                 }
             }
@@ -199,7 +207,7 @@ namespace Madoro
                     myCountdown.Stop();
                     myCountdown.Enabled = false;
                     // Make  sound effect:
-                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(@".\Music\longBreakEnd.wav");
+                    System.Media.SoundPlayer endSound = new System.Media.SoundPlayer(Madoro.Properties.Resources.longBreakEnd);
                     endSound.Play();
                     // Enable Start button
                     btn_Start.Enabled = true;
@@ -209,6 +217,10 @@ namespace Madoro
                     // Reset The Original Duration
                     longBreakDuration = Settings.Default.LongBreakDuration;
                     startFiresCount++;
+                    // Show pop-up notification
+                    pomodoroNotification.BalloonTipTitle = "Long Break Ended!";
+                    pomodoroNotification.BalloonTipText = "Open the app to start the next pomodoro.";
+                    pomodoroNotification.ShowBalloonTip(2500);
 
                 }
             }
@@ -247,6 +259,17 @@ namespace Madoro
         {
             this.WindowState = FormWindowState.Normal;
             this.ShowInTaskbar = true;
+            myNotification.Visible = false;
+        }
+
+        private void pomodoroNotification_BalloonTipClicked(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
+        }
+
+        private void pomodoroNotification_DoubleClick(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Normal;
             myNotification.Visible = false;
         }
     }

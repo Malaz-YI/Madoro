@@ -48,7 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -111,9 +112,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Properties\icon.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +128,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\breakEnd.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\longBreakEnd.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\pomodoroEnd.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

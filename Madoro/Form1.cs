@@ -57,5 +57,17 @@ namespace Madoro
                 throw;
             }
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            if (Settings.Default["PomoDuration"].ToString() != "" || Settings.Default["PomoDuration"] != null)
+            {
+                textbox_PomodoroDuration.Text = Settings.Default["PomoDuration"].ToString();
+                textbox_BreakDuration.Text = Settings.Default["BreakDuration"].ToString();
+                textbox_LongBreakDuration.Text = Settings.Default["LongBreakDuration"].ToString();
+                textbox_TotalNumOfPomos.Text = Settings.Default["NumOfPomos"].ToString();
+                textbox_NumOfPomosForLongBreak.Text = Settings.Default["NumOfPomosUntilLongBreak"].ToString();
+            }
+        }
     }
 }
